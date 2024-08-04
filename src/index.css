@@ -6,7 +6,6 @@ body {
   height: 100vh;
   width: 100vw;
   justify-content: center;
-  align-items: center;
 }
 
 main {
@@ -16,7 +15,7 @@ main {
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 0.5rem;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
@@ -32,7 +31,7 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 0.25rem auto -webkit-focus-ring-color;
 }
 
 ul {
@@ -42,17 +41,20 @@ ul {
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  margin: 8px 0;
-  border: 1px solid black;
-  gap: 1px;
-  background-color: black;
-  border-radius: 8px;
+  margin: 0.5rem 0;
+  gap: 8px;
   overflow: auto;
+  border: 2px solid black;
+  padding: 0.5rem;
+  height: 100%;
+  background-color: rgb(33, 211, 170);
 }
 
 li {
   background-color: white;
-  padding: 8px;
+  padding: 0.5rem;
+  border: 2px solid black;
+  border-radius: 5px;
 }
 
 li:hover {

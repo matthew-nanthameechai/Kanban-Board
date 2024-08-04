@@ -3,25 +3,28 @@ import type { Schema } from '../amplify/data/resource'
 import { generateClient } from 'aws-amplify/data'
 import { Authenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
+import TaskCard from './components/TaskCard'
+import { Task } from './utils/data-task'
 
 const client = generateClient<Schema>()
 
 function App() {
-  const [todos, setTodos] = useState<Array<Schema['Todo']['type']>>([])
+  const [tasks, setTasks] = useState<Task[]>([])
 
   useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
+    client.models.Task.observeQuery().subscribe({
+      next: (data) => setTasks([...data.items as Task[]]),
     })
   }, [])
 
   function createTodo() {
-    client.models.Todo.create({ content: window.prompt('Todo content') })
+    client.models.Task.create({ content: window.prompt('Todo content') })
   }
 
-  function deleteTodo(id: string) {
-    client.models.Todo.delete({ id })
-  }
+  // function deleteTodo(id: string) {
+  //   client.models.Todo.delete({ id })
+  // }
+
   return (
     <Authenticator>
       {({ signOut, user }) => (
@@ -30,19 +33,11 @@ function App() {
           <h1>Kanban</h1>
           <button onClick={createTodo}>+ new</button>
           <ul>
-            {todos.map((todo) => (
-              <li key={todo.id} onClick={() => deleteTodo(todo.id)}>
-                {todo.content}
-              </li>
+            <h3>Todo</h3>
+            {tasks.map((task) => (
+              <TaskCard task={task} />
             ))}
           </ul>
-          <div>
-            🥳 App successfully hosted. Try creating a new todo.
-            <br />
-            <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-              Review next step of this tutorial.
-            </a>
-          </div>
           <button onClick={signOut}>Sign out</button>
         </main>
       )}
