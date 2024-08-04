@@ -4,7 +4,7 @@ import { generateClient } from 'aws-amplify/data'
 import { Authenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
 import TaskCard from './components/TaskCard'
-import { statuses, Task } from './utils/data-task'
+import { Status, statuses, Task } from './utils/data-task'
 
 const client = generateClient<Schema>()
 
@@ -31,11 +31,9 @@ function App() {
     })
   }
 
-  
-
   const updateTask = (task: Task) => {
     const updatedTasks = tasks.map((t) => {
-      return t.id === task.id ? task: t
+      return t.id === task.id ? task : t
     })
     setTasks(updatedTasks)
   }
@@ -43,7 +41,14 @@ function App() {
   // function deleteTodo(id: string) {
   //   client.models.Todo.delete({ id })
   // }
-
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>, status: Status) => {
+    e.preventDefault()
+    const id = e.dataTransfer.getData("id")
+    const task = tasks.find((task) => task.id === id)
+    if (task) {
+      updateTask({...task, status})
+    }
+  }
   return (
     <Authenticator>
       {({ signOut, user }) => (
@@ -53,12 +58,14 @@ function App() {
           <button onClick={createTask}>+ new</button>
           <div className="column-container">
             {columns.map((column) => (
-              <ul>
-                <h3>{column.status}</h3>
-                {column.tasks.map((task) => (
-                  <TaskCard task={task} updateTask={updateTask} />
-                ))}
-              </ul>
+              <div onDrop={(e) => handleDrop(e, column.status)} onDragOver={(e) => e.preventDefault()}>
+                <ul>
+                  <h3>{column.status}</h3>
+                  {column.tasks.map((task) => (
+                    <TaskCard task={task} updateTask={updateTask} />
+                  ))}
+                </ul>
+              </div>
             ))}
           </div>
           <button onClick={signOut}>Sign out</button>

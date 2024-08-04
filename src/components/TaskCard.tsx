@@ -11,7 +11,12 @@ function TaskCard({
   const [isEditingTask, setIsEditingTask] = useState(false)
 
   return (
-    <div>
+    <div
+      draggable
+      onDragStart={(e) => {
+        e.dataTransfer.setData('id', task.id)
+      }}
+    >
       {isEditingTask ? (
         <input
           autoFocus
