@@ -4,21 +4,31 @@ import { generateClient } from 'aws-amplify/data'
 import { Authenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
 import TaskCard from './components/TaskCard'
-import { Task } from './utils/data-task'
+import { statuses, Task } from './utils/data-task'
 
 const client = generateClient<Schema>()
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([])
 
+  const columns = statuses.map((status) => {
+    const taskInColumn = tasks.filter((task) => task.status === status)
+    return {
+      status,
+      tasks: taskInColumn,
+    }
+  })
   useEffect(() => {
     client.models.Task.observeQuery().subscribe({
-      next: (data) => setTasks([...data.items as Task[]]),
+      next: (data) => setTasks([...(data.items as Task[])]),
     })
   }, [])
 
   function createTodo() {
-    client.models.Task.create({ content: window.prompt('Todo content') })
+    client.models.Task.create({
+      content: window.prompt('Todo content'),
+      status: 'todo',
+    })
   }
 
   // function deleteTodo(id: string) {
@@ -32,12 +42,16 @@ function App() {
           <h1>{user?.signInDetails?.loginId}'s todos</h1>
           <h1>Kanban</h1>
           <button onClick={createTodo}>+ new</button>
-          <ul>
-            <h3>Todo</h3>
-            {tasks.map((task) => (
-              <TaskCard task={task} />
+          <div className='column-container'>
+            {columns.map((column) => (
+              <ul>
+                <h3>{column.status}</h3>
+                {column.tasks.map((task) => (
+                  <TaskCard task={task} />
+                ))}
+              </ul>
             ))}
-          </ul>
+          </div>
           <button onClick={signOut}>Sign out</button>
         </main>
       )}

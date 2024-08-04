@@ -10,6 +10,7 @@ const schema = a.schema({
   Task: a
     .model({
       content: a.string(),
+      status: a.string(),
     })
     .authorization((allow) => [allow.owner()]),
 })

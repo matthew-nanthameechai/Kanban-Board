@@ -65,3 +65,8 @@ a {
   font-weight: 800;
   text-decoration: none;
 }
+
+.column-container{
+  display: flex;
+  gap: 1rem;
+}
