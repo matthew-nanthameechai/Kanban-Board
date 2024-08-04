@@ -24,11 +24,20 @@ function App() {
     })
   }, [])
 
-  function createTodo() {
+  function createTask() {
     client.models.Task.create({
       content: window.prompt('Todo content'),
       status: 'todo',
     })
+  }
+
+  
+
+  const updateTask = (task: Task) => {
+    const updatedTasks = tasks.map((t) => {
+      return t.id === task.id ? task: t
+    })
+    setTasks(updatedTasks)
   }
 
   // function deleteTodo(id: string) {
@@ -41,13 +50,13 @@ function App() {
         <main>
           <h1>{user?.signInDetails?.loginId}'s todos</h1>
           <h1>Kanban</h1>
-          <button onClick={createTodo}>+ new</button>
-          <div className='column-container'>
+          <button onClick={createTask}>+ new</button>
+          <div className="column-container">
             {columns.map((column) => (
               <ul>
                 <h3>{column.status}</h3>
                 {column.tasks.map((task) => (
-                  <TaskCard task={task} />
+                  <TaskCard task={task} updateTask={updateTask} />
                 ))}
               </ul>
             ))}
