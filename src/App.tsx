@@ -31,22 +31,33 @@ function App() {
     })
   }
 
-  const updateTask = (task: Task) => {
-    const updatedTasks = tasks.map((t) => {
-      return t.id === task.id ? task : t
-    })
+  const updateTask = async (task: Task) => {
+    const updatedTasks = tasks.map((t) => (t.id === task.id ? task : t))
     setTasks(updatedTasks)
+    try {
+      await client.models.Task.update({
+        id: task.id,
+        content: task.content,
+        status: task.status,
+      })
+    } catch (error) {
+      console.error('Error updating task:', error)
+    }
   }
 
   // function deleteTodo(id: string) {
   //   client.models.Todo.delete({ id })
   // }
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>, status: Status) => {
+
+  const handleDrop = async (
+    e: React.DragEvent<HTMLDivElement>,
+    status: Status
+  ) => {
     e.preventDefault()
-    const id = e.dataTransfer.getData("id")
+    const id = e.dataTransfer.getData('id')
     const task = tasks.find((task) => task.id === id)
     if (task) {
-      updateTask({...task, status})
+      await updateTask({ ...task, status })
     }
   }
   return (
@@ -57,14 +68,17 @@ function App() {
           <h1>Kanban</h1>
           <button onClick={createTask}>+ new</button>
           <div className="column-container">
-            {columns.map((column) => (
-              <div onDrop={(e) => handleDrop(e, column.status)} onDragOver={(e) => e.preventDefault()}>
-                <ul>
-                  <h3>{column.status}</h3>
-                  {column.tasks.map((task) => (
-                    <TaskCard task={task} updateTask={updateTask} />
-                  ))}
-                </ul>
+            {columns.map((column, index) => (
+              <div
+              className='column'
+                key={index}
+                onDrop={(e) => handleDrop(e, column.status)}
+                onDragOver={(e) => e.preventDefault()}
+              >
+                <h3>{column.status}</h3>
+                {column.tasks.map((task, i) => (
+                  <TaskCard key={i} task={task} updateTask={updateTask} />
+                ))}
               </div>
             ))}
           </div>

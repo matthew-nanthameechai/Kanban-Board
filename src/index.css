@@ -34,7 +34,7 @@ button:focus-visible {
   outline: 0.25rem auto -webkit-focus-ring-color;
 }
 
-ul {
+.column {
   padding-inline-start: 0;
   margin-block-start: 0;
   margin-block-end: 0;

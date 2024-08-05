@@ -22,7 +22,7 @@ function TaskCard({
           autoFocus
           onBlur={() => setIsEditingTask(false)}
           value={task.content}
-          onChange={(e) => updateTask({ ...task, content: e.target.value })}
+          onChange={async (e) => await updateTask({ ...task, content: e.target.value })}
         />
       ) : (
         <li onClick={() => setIsEditingTask(true)}>{task.content}</li>
