@@ -5,7 +5,7 @@ This is a React Kanban Baord integrated with AWS Amplify, streamlined for scalab
 
 ## Technologies used
 - **Frontend**: React, TypeScript, HTML, CSS
-- **Authentication**: Amazon Cognito. AppSync
+- **Authentication**: Amazon Cognito.
 - **API**: Amazon AppSync.
 - **Database**: Amazon DynamoDB.
   
