@@ -45,9 +45,9 @@ function App() {
     }
   }
 
-  // function deleteTodo(id: string) {
-  //   client.models.Todo.delete({ id })
-  // }
+  function deleteTask(id: string) {
+    client.models.Task.delete({ id })
+  }
 
   const handleDrop = async (
     e: React.DragEvent<HTMLDivElement>,
@@ -68,16 +68,18 @@ function App() {
           <h1>Kanban</h1>
           <button onClick={createTask}>+ new</button>
           <div className="column-container">
-            {columns.map((column, index) => (
+            {columns.map((column) => (
               <div
-              className='column'
-                key={index}
+                className="column"
+                key={column.status}
                 onDrop={(e) => handleDrop(e, column.status)}
                 onDragOver={(e) => e.preventDefault()}
               >
                 <h3>{column.status}</h3>
                 {column.tasks.map((task, i) => (
-                  <TaskCard key={i} task={task} updateTask={updateTask} />
+                  <div key={i} onDoubleClick={() => deleteTask(task.id)}>
+                    <TaskCard task={task} updateTask={updateTask} />
+                  </div>
                 ))}
               </div>
             ))}
