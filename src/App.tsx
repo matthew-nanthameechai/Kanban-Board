@@ -24,7 +24,7 @@ function App() {
     })
   }, [])
 
-  function createTask() {
+  const createTask = () => {
     client.models.Task.create({
       content: window.prompt('Todo content'),
       status: 'todo',
@@ -45,7 +45,7 @@ function App() {
     }
   }
 
-  function deleteTask(id: string) {
+  const deleteTask = (id: string) => {
     client.models.Task.delete({ id })
   }
 
@@ -64,7 +64,8 @@ function App() {
     <Authenticator>
       {({ signOut, user }) => (
         <main>
-          <h1>{user?.signInDetails?.loginId}'s todos</h1>
+          <h1>{user?.signInDetails?.loginId}'s Kanban Board</h1>
+          <button onClick={signOut}>Sign out</button>
           <h1>Kanban</h1>
           <button onClick={createTask}>+ new</button>
           <div className="column-container">
@@ -84,7 +85,7 @@ function App() {
               </div>
             ))}
           </div>
-          <button onClick={signOut}>Sign out</button>
+          
         </main>
       )}
     </Authenticator>
