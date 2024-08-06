@@ -25,7 +25,3 @@ My learning outcomes for this project were to create a fullstack application tha
 - Test Test Test
 - add priority score
 - Refactoring!
-  
-## License
-
-This library is licensed under the MIT-0 License. See the LICENSE file.
