@@ -24,7 +24,7 @@ My learning outcomes for this project were to create a fullstack application tha
 
 ## What's Next?
 - Styling
-- Create Input Field For Creating Tasks
+- ~~Create Input Field For Creating Tasks~~
 - Improve UI
 - Add Error Handling
 - Test Test Test
