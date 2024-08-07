@@ -10,7 +10,7 @@ const client = generateClient<Schema>()
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([])
-
+  const [newTask, setNewTask] = useState('')
   const columns = statuses.map((status) => {
     const taskInColumn = tasks.filter((task) => task.status === status)
     return {
@@ -24,9 +24,9 @@ function App() {
     })
   }, [])
 
-  const createTask = () => {
+  const createTask = (newTask: string) => {
     client.models.Task.create({
-      content: window.prompt('Todo content'),
+      content: newTask,
       status: 'todo',
     })
   }
@@ -60,6 +60,16 @@ function App() {
       await updateTask({ ...task, status })
     }
   }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (newTask === '') {
+      return
+    }
+    createTask(newTask)
+    setNewTask('')
+  }
+
   return (
     <Authenticator>
       {({ signOut, user }) => (
@@ -73,7 +83,14 @@ function App() {
             <p> To edit a task click the task</p>
             <p>to delete a task double click on the task</p>
           </div>
-          <button onClick={createTask}>+ new</button>
+          <form onSubmit={handleSubmit}>
+            <input
+              placeholder="Add New Task"
+              onChange={(e) => setNewTask(e.target.value)}
+              value={newTask}
+            />
+            <button>Add</button>
+          </form>
           <div className="column-container">
             {columns.map((column) => (
               <div
