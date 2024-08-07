@@ -79,9 +79,10 @@ function App() {
 
           <div>
             <h1>Kanban</h1>
-            <p>Write your task and click add or press enter</p>
-            <p>Click on the task card to edit task. Click off to update</p>
-            <p>To delete a task double click on the task</p>
+            <p>Write your task and click add or press enter.</p>
+            <p>Click on the task card to edit task. Click off to update.</p>
+            <p>To delete a task double click on the task.</p>
+            <p>To move task card drag and drop.</p>
           </div>
           <form onSubmit={handleSubmit}>
             <input
