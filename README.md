@@ -3,6 +3,11 @@ This is a React Kanban Baord integrated with AWS Amplify, streamlined for scalab
 
 <img src="https://cdn.discordapp.com/attachments/436519510833364992/1270042169285283891/image.png?ex=66b24271&is=66b0f0f1&hm=505094c16682f38b45c4ccdd8f54e8546626e81f4e4628ac95d6a359ca9a7883&" alt="screen-shot"/>
 
+## How To Use
+Click + new to create a new task.
+To edit a task click the task.
+to delete a task double click on the task.
+
 ## Learning Outcomes
 My learning outcomes for this project were to create a fullstack application that consolidates my learning into a fun, useful and challenging project. For this project, I wanted to implement AWS Services, and improve on making tests.
 

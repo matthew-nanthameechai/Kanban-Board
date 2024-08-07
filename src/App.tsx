@@ -66,7 +66,13 @@ function App() {
         <main>
           <h1>{user?.signInDetails?.loginId}'s Kanban Board</h1>
           <button onClick={signOut}>Sign out</button>
-          <h1>Kanban</h1>
+
+          <div>
+            <h1>Kanban</h1>
+            <p>Click + new to create a new task</p>
+            <p> To edit a task click the task</p>
+            <p>to delete a task double click on the task</p>
+          </div>
           <button onClick={createTask}>+ new</button>
           <div className="column-container">
             {columns.map((column) => (
@@ -85,7 +91,6 @@ function App() {
               </div>
             ))}
           </div>
-          
         </main>
       )}
     </Authenticator>
