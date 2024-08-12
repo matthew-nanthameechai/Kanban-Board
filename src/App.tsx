@@ -86,11 +86,12 @@ function App() {
           </div>
           <form onSubmit={handleSubmit}>
             <input
+              className="addTask-input"
               placeholder="Add New Task"
               onChange={(e) => setNewTask(e.target.value)}
               value={newTask}
             />
-            <button>Add</button>
+            <button className='add-button'>Add</button>
           </form>
           <div className="column-container">
             {columns.map((column) => (
