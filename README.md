@@ -1,7 +1,7 @@
 ## Overview
 This is a React Kanban Baord integrated with AWS Amplify, streamlined for scalability and performance.
 
-<img src="https://cdn.discordapp.com/attachments/436519510833364992/1270042169285283891/image.png?ex=66b24271&is=66b0f0f1&hm=505094c16682f38b45c4ccdd8f54e8546626e81f4e4628ac95d6a359ca9a7883&" alt="screen-shot"/>
+<img src="https://cdn.discordapp.com/attachments/436519510833364992/1270042169285283891/image.png?ex=66bb7cf1&is=66ba2b71&hm=e5aa8df00d356d70fe34ae9886ff0a5ea55c7126f8646f6b5956249137463c45&" alt="screen-shot"/>
 
 ## How To Use
 - Type in your task and click Add or press enter.
